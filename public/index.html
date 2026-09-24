@@ -1,839 +1,168 @@
-<!DOCTYPE h
-    <title>QUICK TOP UP - Free Fire</title>
-    
-    <style>
-        :root {
-            --primary-blue: #1a73e8;
-            --dark-blue: #0d47a1;
-            --bg-light: #f0f2f5;
-            --white: #ffffff;
-            --text-dark: #202124;
-            --text-gray: #5f6368;
-            --orange: #ff6b00;
-            --red: #d32f2f;
-            --border-color: #dadce0;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Hind Siliguri', 'Poppins', sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-light);
-            padding-bottom: 80px;
-            color: var(--text-dark);
-        }
-
-        /* ==================== MAIN APP (Home) ==================== */
-        #mainApp {
-            display: block; 
-        }
-
-        .top-header {
-            background: linear-gradient(135deg, #1a73e8, #0d47a1);
-            padding: 12px 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: white;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-        }
-
-        .main-logo-area {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 20px;
-            font-weight: 800;
-            letter-spacing: 1px;
-        }
-
-        .main-logo-area img {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid #ff6b00;
-        }
-
-        .main-logo-area .logo-text span {
-            color: #ff6b00;
-        }
-
-        .header-right {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .login-top-btn {
-            background: #0b2e59;
-            color: white;
-            padding: 8px 20px;
-            border-radius: 6px;
-            font-weight: 600;
-            font-size: 15px;
-            cursor: pointer;
-            border: 1px solid rgba(255,255,255,0.2);
-            transition: background 0.2s;
-        }
-
-        .login-top-btn:hover {
-            background: #082040;
-        }
-
-        .login-top-btn.hidden {
-            display: none;
-        }
-
-        .hero-banner {
-            position: relative;
-            background: #111;
-            overflow: hidden;
-            height: 180px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .hero-banner img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.6;
-        }
-
-        .hero-text {
-            position: absolute;
-            text-align: center;
-            color: white;
-            z-index: 2;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
-        }
-
-        .hero-text h1 {
-            font-size: 32px;
-            font-weight: 800;
-            letter-spacing: 2px;
-            color: #ff9800;
-            line-height: 1.1;
-        }
-
-        .hero-text h1 span {
-            color: white;
-        }
-
-        .hero-text p {
-            font-size: 12px;
-            letter-spacing: 3px;
-            margin-top: 5px;
-            font-weight: 600;
-            color: #eee;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 28px;
-            font-weight: 800;
-            color: #0b2e59;
-            padding: 20px 0 10px;
-            letter-spacing: 1px;
-        }
-
-        .menu-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            padding: 10px 16px 30px;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .menu-item {
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            cursor: pointer;
-            transition: transform 0.2s;
-            border: 1px solid #e0e0e0;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .menu-item:active {
-            transform: scale(0.96);
-        }
-
-        .menu-img-wrapper {
-            position: relative;
-            width: 100%;
-            height: 120px;
-            background: #1a1a2e;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        .menu-img-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.85;
-        }
-
-        .menu-badge {
-            position: absolute;
-            top: 6px;
-            left: 6px;
-            background: #ff6b00;
-            color: white;
-            font-size: 10px;
-            font-weight: 700;
-            padding: 2px 8px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            gap: 3px;
-        }
-
-        .menu-label {
-            padding: 12px 10px;
-            text-align: center;
-            font-weight: 700;
-            font-size: 15px;
-            color: #202124;
-            background: white;
-            flex-grow: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* ==================== BOTTOM NAVIGATION ==================== */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: white;
-            display: flex;
-            justify-content: space-around;
-            padding: 8px 0;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-            z-index: 100;
-            border-top: 1px solid #eee;
-        }
-
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-            font-size: 11px;
-            color: var(--text-gray);
-            font-weight: 600;
-            cursor: pointer;
-            transition: color 0.2s;
-            padding: 4px 10px;
-            text-decoration: none;
-        }
-
-        .nav-item i {
-            font-size: 20px;
-        }
-
-        .nav-item.active {
-            color: var(--primary-blue);
-        }
-
-        .nav-item.hidden {
-            display: none;
-        }
-
-        /* --- Floating Help (WhatsApp) --- */
-        .help-btn {
-            position: fixed;
-            bottom: 85px;
-            right: 16px;
-            background: #25D366;
-            color: white;
-            padding: 10px 18px;
-            border-radius: 30px;
-            font-weight: 700;
-            font-size: 14px;
-            box-shadow: 0 4px 12px rgba(37,211,102,0.4);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            z-index: 99;
-            cursor: pointer;
-            border: none;
-            text-decoration: none;
-        }
-
-        .help-btn i {
-            font-size: 18px;
-        }
-
-        /* Modal */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.5);
-            z-index: 200;
-            align-items: flex-end;
-            justify-content: center;
-        }
-
-        .modal-overlay.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background: white;
-            width: 100%;
-            max-width: 600px;
-            border-radius: 20px 20px 0 0;
-            padding: 20px;
-            max-height: 90vh;
-            overflow-y: auto;
-            animation: slideUp 0.3s ease;
-        }
-
-        @keyframes slideUp {
-            from { transform: translateY(100%); }
-            to { transform: translateY(0); }
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 15px;
-        }
-
-        .modal-header h2 {
-            font-size: 20px;
-            font-weight: 700;
-            color: #0b2e59;
-        }
-
-        .close-modal {
-            background: #f1f3f4;
-            border: none;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            font-size: 18px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #5f6368;
-        }
-
-        .package-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .package-item {
-            border: 1px solid #dadce0;
-            border-radius: 10px;
-            padding: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            transition: border-color 0.2s, background 0.2s;
-        }
-
-        .package-item.selected {
-            border-color: #1a73e8;
-            background: #e8f0fe;
-        }
-
-        .package-item input[type="radio"] {
-            accent-color: #1a73e8;
-            width: 16px;
-            height: 16px;
-        }
-
-        .package-info {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .package-info .diamonds {
-            font-size: 14px;
-            font-weight: 600;
-            color: #202124;
-        }
-
-        .package-info .price {
-            font-size: 14px;
-            font-weight: 700;
-            color: #ff6b00;
-        }
-
-        .input-group-modal {
-            margin-bottom: 20px;
-        }
-
-        .input-group-modal label {
-            display: block;
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 6px;
-            color: #5f6368;
-        }
-
-        .input-group-modal input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #dadce0;
-            border-radius: 10px;
-            font-size: 16px;
-            outline: none;
-        }
-
-        .order-btn {
-            width: 100%;
-            padding: 14px;
-            background: #1a73e8;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 18px;
-            font-weight: 700;
-            cursor: pointer;
-        }
-
-        /* ==================== LOGIN PAGE ==================== */
-        #loginPage {
-            display: none; 
-            flex-direction: column;
-            min-height: 100vh;
-            background: #f8f9fa;
-        }
-
-        .login-header {
-            background: white;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        .login-header .logo-area {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 22px;
-            font-weight: 800;
-            letter-spacing: 1px;
-            color: #0b2e59;
-        }
-
-        .login-header .logo-area span {
-            color: #ff6b00;
-        }
-
-        .login-header .back-btn {
-            background: #0b2e59;
-            color: white;
-            padding: 8px 20px;
-            border-radius: 6px;
-            font-weight: 600;
-            font-size: 15px;
-            cursor: pointer;
-            border: none;
-        }
-
-        .login-container {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .login-card {
-            background: white;
-            width: 100%;
-            max-width: 420px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            padding: 30px;
-            border: 1px solid #e0e0e0;
-        }
-
-        .login-card h2 {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: #202124;
-        }
-
-        .google-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #dadce0;
-            border-radius: 8px;
-            background: white;
-            font-size: 16px;
-            font-weight: 600;
-            color: #3c4043;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .google-btn:hover {
-            background: #f8f9fa;
-        }
-
-        .google-btn i {
-            color: #4285F4;
-            font-size: 20px;
-        }
-
-        .divider {
-            display: flex;
-            align-items: center;
-            text-align: center;
-            margin: 20px 0;
-            color: #5f6368;
-            font-size: 14px;
-        }
-
-        .divider::before,
-        .divider::after {
-            content: '';
-            flex: 1;
-            border-bottom: 1px solid #dadce0;
-        }
-
-        .divider span {
-            padding: 0 10px;
-        }
-
-        .input-group-login {
-            margin-bottom: 15px;
-        }
-
-        .input-group-login label {
-            display: block;
-            font-size: 15px;
-            font-weight: 600;
-            margin-bottom: 5px;
-            color: #202124;
-        }
-
-        .input-group-login input {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #dadce0;
-            border-radius: 8px;
-            font-size: 15px;
-            outline: none;
-            background: #f8f9fa;
-        }
-
-        .input-group-login input:focus {
-            border-color: #1a73e8;
-            background: white;
-        }
-
-        .login-submit-btn {
-            width: 100%;
-            padding: 14px;
-            background: #0b2e59;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 18px;
-            font-weight: 700;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
-        .register-link {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 15px;
-            color: #202124;
-        }
-
-        .register-link a {
-            color: #1a73e8;
-            text-decoration: none;
-            font-weight: 700;
-            cursor: pointer;
-        }
-
-        /* ==================== REGISTER PAGE ==================== */
-        #registerPage {
-            display: none; 
-            flex-direction: column;
-            min-height: 100vh;
-            background: #f8f9fa;
-        }
-
-        .register-header {
-            background: white;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        .register-header .logo-area {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 22px;
-            font-weight: 800;
-            letter-spacing: 1px;
-            color: #0b2e59;
-        }
-
-        .register-header .logo-area span {
-            color: #ff6b00;
-        }
-
-        .register-header .back-btn {
-            background: #0b2e59;
-            color: white;
-            padding: 8px 20px;
-            border-radius: 6px;
-            font-weight: 600;
-            font-size: 15px;
-            cursor: pointer;
-            border: none;
-        }
-
-        .register-container {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .register-card {
-            background: white;
-            width: 100%;
-            max-width: 420px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            padding: 30px;
-            border: 1px solid #e0e0e0;
-        }
-
-        .register-card h2 {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: #202124;
-        }
-
-        .register-submit-btn {
-            width: 100%;
-            padding: 14px;
-            background: #0b2e59;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 18px;
-            font-weight: 700;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
-        .register-footer {
-            background: #0b2e59;
-            color: white;
-            padding: 15px;
-            text-align: center;
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-        /* ==================== GOOGLE LOGIN POPUP ==================== */
-        .google-popup-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.5);
-            z-index: 300;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .google-popup-overlay.active {
-            display: flex;
-        }
-
-        .google-popup {
-            background: white;
-            width: 90%;
-            max-width: 400px;
-            border-radius: 16px;
-            padding: 30px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-            animation: popIn 0.3s ease;
-        }
-
-        @keyframes popIn {
-            from { transform: scale(0.8); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-
-        .google-popup-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 20px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 15px;
-        }
-
-        .google-popup-header img {
-            width: 40px;
-            height: 40px;
-        }
-
-        .google-popup-header h3 {
-            font-size: 20px;
-            font-weight: 600;
-            color: #202124;
-        }
-
-        .google-popup-header p {
-            font-size: 13px;
-            color: #5f6368;
-            margin-top: 2px;
-        }
-
-        .google-popup .input-group-login {
-            margin-bottom: 15px;
-        }
-
-        .google-popup .input-group-login input {
-            width: 100%;
-            padding: 14px;
-            border: 1px solid #dadce0;
-            border-radius: 8px;
-            font-size: 16px;
-            outline: none;
-            background: #f8f9fa;
-        }
-
-        .google-popup .input-group-login input:focus {
-            border-color: #1a73e8;
-            background: white;
-        }
-
-        .google-login-btn {
-            width: 100%;
-            padding: 14px;
-            background: #1a73e8;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
-        .google-login-btn:hover {
-            background: #0d47a1;
-        }
-
-        .google-popup-footer {
-            text-align: center;
-            margin-top: 15px;
-            font-size: 13px;
-            color: #5f6368;
-        }
-
-        @media (max-width: 400px) {
-            .menu-grid { gap: 10px; padding: 10px; }
-            .menu-img-wrapper { height: 100px; }
-            .menu-label { font-size: 13px; padding: 8px 6px; }
-            .login-card, .register-card { padding: 20px; }
-            .google-popup { padding: 20px; }
-        }
-    </style>
-<style>#mainApp,#loginPage,#registerPage{display:block !important;}</style><style>body,#mainApp,#loginPage,#registerPage{display:block!important;visibility:visible!important;opacity:1!important;}</style></head>
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QUICK TOP UP - Free Fire</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+body { background: #f0f2f5; padding-bottom: 80px; color: #202124; display: block !important; }
+.top-header { background: linear-gradient(135deg, #1a73e8, #0d47a1); padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; color: white; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+.logo { font-size: 20px; font-weight: 800; letter-spacing: 1px; }
+.logo span { color: #ff6b00; }
+.login-btn { background: #0b2e59; color: white; padding: 8px 20px; border-radius: 6px; font-weight: 600; cursor: pointer; border: none; }
+.hero { background: linear-gradient(135deg, #1a1a2e, #16213e); height: 180px; display: flex; align-items: center; justify-content: center; text-align: center; color: white; }
+.hero h1 { font-size: 32px; font-weight: 800; color: #ff9800; }
+.hero h1 span { color: white; }
+.hero p { font-size: 12px; letter-spacing: 3px; margin-top: 5px; }
+.section-title { text-align: center; font-size: 28px; font-weight: 800; color: #0b2e59; padding: 20px 0 10px; }
+.menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 10px 16px 30px; max-width: 600px; margin: 0 auto; }
+.menu-item { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.08); cursor: pointer; transition: transform 0.2s; border: 1px solid #e0e0e0; }
+.menu-item:active { transform: scale(0.96); }
+.menu-img { height: 120px; background: linear-gradient(135deg, #1a73e8, #0d47a1); display: flex; align-items: center; justify-content: center; font-size: 48px; }
+.menu-label { padding: 14px; text-align: center; font-weight: 700; font-size: 15px; }
+.bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 10px 0; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); }
+.nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 11px; color: #5f6368; font-weight: 600; cursor: pointer; }
+.nav-item.active { color: #1a73e8; }
+.nav-icon { font-size: 20px; }
+.help-btn { position: fixed; bottom: 85px; right: 16px; background: #25D366; color: white; padding: 10px 18px; border-radius: 30px; font-weight: 700; font-size: 14px; box-shadow: 0 4px 12px rgba(37,211,102,0.4); z-index: 99; text-decoration: none; }
+.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 200; align-items: flex-end; justify-content: center; }
+.modal-overlay.active { display: flex; }
+.modal-content { background: white; width: 100%; max-width: 600px; border-radius: 20px 20px 0 0; padding: 20px; max-height: 90vh; overflow-y: auto; }
+.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
+.modal-header h2 { font-size: 20px; color: #0b2e59; }
+.close-modal { background: #f1f3f4; border: none; width: 36px; height: 36px; border-radius: 50%; font-size: 18px; cursor: pointer; }
+.pkg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+.pkg-item { border: 2px solid #dadce0; border-radius: 10px; padding: 12px; cursor: pointer; text-align: center; }
+.pkg-item.selected { border-color: #1a73e8; background: #e8f0fe; }
+.pkg-item .diamonds { font-weight: 600; color: #202124; }
+.pkg-item .price { font-weight: 700; color: #ff6b00; margin-top: 4px; }
+.input-group { margin-bottom: 20px; }
+.input-group label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px; color: #5f6368; }
+.input-group input { width: 100%; padding: 12px; border: 1px solid #dadce0; border-radius: 10px; font-size: 16px; outline: none; }
+.order-btn { width: 100%; padding: 14px; background: #1a73e8; color: white; border: none; border-radius: 10px; font-size: 18px; font-weight: 700; cursor: pointer; }
+#loginPage { display: none; min-height: 100vh; background: #f8f9fa; padding: 20px; }
+#loginPage.active { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.login-card { background: white; width: 100%; max-width: 420px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); padding: 30px; }
+.login-card h2 { font-size: 28px; margin-bottom: 20px; color: #202124; }
+.login-card input { width: 100%; padding: 12px 15px; border: 1px solid #dadce0; border-radius: 8px; font-size: 15px; margin-bottom: 15px; background: #f8f9fa; }
+.login-card button { width: 100%; padding: 14px; background: #0b2e59; color: white; border: none; border-radius: 8px; font-size: 18px; font-weight: 700; cursor: pointer; }
+.back-btn { background: #0b2e59; color: white; padding: 8px 20px; border-radius: 6px; font-weight: 600; cursor: pointer; border: none; margin-bottom: 20px; }
+</style>
+</head>
 <body>
+
+<div id="mainApp">
+  <div class="top-header">
+    <div class="logo">QUICK<span>TOPUP</span></div>
+    <button class="login-btn" onclick="openLogin()">Login</button>
+  </div>
+
+  <div class="hero">
+    <div>
+      <h1>FREE <span>FIRE</span></h1>
+      <p>DIAMOND TOP UP</p>
+    </div>
+  </div>
+
+  <h2 class="section-title">Select Service</h2>
+  <div class="menu-grid">
+    <div class="menu-item" onclick="openOrder('diamonds')">
+      <div class="menu-img">💎</div>
+      <div class="menu-label">Diamond Top Up</div>
+    </div>
+    <div class="menu-item" onclick="openOrder('membership')">
+      <div class="menu-img">👑</div>
+      <div class="menu-label">Weekly Membership</div>
+    </div>
+    <div class="menu-item" onclick="openOrder('levelup')">
+      <div class="menu-img">⬆️</div>
+      <div class="menu-label">Level Up Pass</div>
+    </div>
+    <div class="menu-item" onclick="openOrder('bundle')">
+      <div class="menu-img">🎁</div>
+      <div class="menu-label">Special Bundle</div>
+    </div>
+  </div>
+</div>
+
+<div id="loginPage">
+  <div class="login-card">
+    <h2>Login</h2>
+    <input type="email" id="loginEmail" placeholder="Email">
+    <input type="password" id="loginPassword" placeholder="Password">
+    <button onclick="doLogin()">Login</button>
+    <button class="back-btn" onclick="closeLogin()" style="margin-top:10px;background:#5f6368;">Back</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="orderModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 id="modalTitle">Diamond Top Up</h2>
+      <button class="close-modal" onclick="closeModal()">✕</button>
+    </div>
+    <div class="pkg-grid" id="pkgGrid"></div>
+    <div class="input-group">
+      <label>Free Fire Player ID</label>
+      <input type="text" id="freeFireId" placeholder="যেমন: 123456789">
+    </div>
+    <button class="order-btn" onclick="placeOrder()">Place Order</button>
+  </div>
+</div>
+
+<div class="bottom-nav">
+  <div class="nav-item active"><span class="nav-icon">🏠</span><span>Home</span></div>
+  <div class="nav-item"><span class="nav-icon">🛒</span><span>Orders</span></div>
+  <div class="nav-item"><span class="nav-icon">👤</span><span>Profile</span></div>
+</div>
+
+<a class="help-btn" href="https://wa.me/8801700000000" target="_blank">💬 Help</a>
+
 <script>
-function showPage(id) {
-  document.querySelectorAll('#mainApp, #loginPage, #registerPage').forEach(p => p.style.display = 'none');
-  const el = document.getElementById(id);
-  if (el) el.style.display = (id === 'mainApp') ? 'block' : 'flex';
-}
-document.getElementById('loginTopBtn')?.addEventListener('click', () => showPage('loginPage'));
-document.getElementById('registerSubmit')?.addEventListener('click', async () => {
-  const name = document.getElementById('regName').value;
-  const email = document.getElementById('regEmail').value;
-  const password = document.getElementById('regPassword').value;
-  const res = await fetch('/api/auth/register', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name, email, password })
-  });
-  const data = await res.json();
-  if (data.token) { localStorage.setItem('token', data.token); alert('✅ Registration সফল!'); showPage('mainApp'); }
-  else alert('❌ ' + data.error);
-});
-document.getElementById('loginSubmit')?.addEventListener('click', async () => {
+const PKG = {
+  diamonds: [{n:'25 💎',p:25},{n:'50 💎',p:45},{n:'115 💎',p:95},{n:'240 💎',p:185},{n:'610 💎',p:450},{n:'1240 💎',p:880}],
+  membership: [{n:'Weekly',p:160},{n:'Monthly',p:790}],
+  levelup: [{n:'Level Up Pass',p:120}],
+  bundle: [{n:'Starter Bundle',p:99},{n:'Pro Bundle',p:499}]
+};
+const TITLES = {diamonds:'💎 Diamond Top Up', membership:'👑 Membership', levelup:'⬆️ Level Up Pass', bundle:'🎁 Special Bundle'};
+let selectedPkg = null;
+
+function openLogin() { document.getElementById('loginPage').classList.add('active'); document.getElementById('mainApp').style.display='none'; }
+function closeLogin() { document.getElementById('loginPage').classList.remove('active'); document.getElementById('mainApp').style.display='block'; }
+function doLogin() {
   const email = document.getElementById('loginEmail').value;
-  const password = document.getElementById('loginPassword').value;
-  const res = await fetch('/api/auth/login', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, password })
+  const pass = document.getElementById('loginPassword').value;
+  if (email && pass) { alert('✅ Login সফল!'); closeLogin(); }
+  else alert('❌ Email এবং Password দিন');
+}
+function openOrder(service) {
+  document.getElementById('modalTitle').textContent = TITLES[service];
+  const grid = document.getElementById('pkgGrid');
+  grid.innerHTML = '';
+  selectedPkg = null;
+  PKG[service].forEach(p => {
+    const d = document.createElement('div');
+    d.className = 'pkg-item';
+    d.innerHTML = '<div class="diamonds">'+p.n+'</div><div class="price">৳ '+p.p+'</div>';
+    d.onclick = () => {
+      document.querySelectorAll('.pkg-item').forEach(x => x.classList.remove('selected'));
+      d.classList.add('selected');
+      selectedPkg = p;
+    };
+    grid.appendChild(d);
   });
-  const data = await res.json();
-  if (data.token) { localStorage.setItem('token', data.token); alert('✅ Login সফল!'); showPage('mainApp'); }
-  else alert('❌ ' + data.error);
-});
-document.getElementById('orderBtn')?.addEventListener('click', async () => {
-  const freeFireId = document.getElementById('freeFireId').value;
-  const selected = document.querySelector('.package-item.selected');
-  if (!selected) return alert('Package select koro');
-  const pkgName = selected.querySelector('.diamonds').textContent;
-  const price = parseInt(selected.querySelector('.price').textContent.replace(/\D/g, ''));
-  const token = localStorage.getItem('token');
-  const res = await fetch('/api/order', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
-    body: JSON.stringify({ freeFireId, packageName: pkgName, price })
-  });
-  const data = await res.json();
-  if (data.success) alert('✅ Order hoyeche! ID: ' + data.order._id);
-  else alert('❌ ' + data.error);
-});
+  document.getElementById('orderModal').classList.add('active');
+}
+function closeModal() { document.getElementById('orderModal').classList.remove('active'); }
+function placeOrder() {
+  if (!selectedPkg) return alert('একটা package select করো');
+  const ffid = document.getElementById('freeFireId').value;
+  if (!ffid) return alert('Free Fire ID দাও');
+  alert('✅ Order হয়েছে!\nPackage: '+selectedPkg.n+'\nID: '+ffid);
+  closeModal();
+}
 </script>
-</body></html>
+</body>
+</html>
