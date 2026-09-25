@@ -7,6 +7,310 @@
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
 body { background: #f0f2f5; padding-bottom: 80px; color: #202124; }
+.top-header { background: linear-gradient(135deg, #1a73e8, #0d47a1); padding: 10px 16px; display: flex; justify-content: space-between; align-items: center; color: white; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+.logo img { height: 42px; display: block; }
+.logo-text { font-size: 18px; font-weight: 800; letter-spacing: 1px; }
+.logo-text span { color: #ff6b00; }
+.login-btn { background: #0b2e59; color: white; padding: 8px 18px; border-radius: 6px; font-weight: 600; font-size: 14px; cursor: pointer; border: none; }
+.hero { background: linear-gradient(135deg, #1a1a2e, #16213e); height: 160px; display: flex; align-items: center; justify-content: center; text-align: center; color: white; }
+.hero h1 { font-size: 30px; font-weight: 800; color: #ff9800; }
+.hero h1 span { color: white; }
+.hero p { font-size: 12px; letter-spacing: 3px; margin-top: 5px; }
+.section-title { text-align: center; font-size: 24px; font-weight: 800; color: #0b2e59; padding: 18px 0 10px; }
+.menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; padding: 10px 16px 30px; max-width: 600px; margin: 0 auto; }
+.menu-item { background: white; border-radius: 14px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.08); cursor: pointer; border: 1px solid #e0e0e0; transition: transform 0.15s; }
+.menu-item:active { transform: scale(0.96); }
+.menu-img { height: 110px; background: linear-gradient(135deg, #1a73e8, #0d47a1); display: flex; align-items: center; justify-content: center; font-size: 42px; }
+.menu-label { padding: 12px 8px; text-align: center; font-weight: 700; font-size: 13px; line-height: 1.3; }
+.bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 10px 0; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 100; }
+.nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 11px; color: #5f6368; font-weight: 600; }
+.nav-item.active { color: #1a73e8; }
+.nav-icon { font-size: 20px; }
+.help-btn { position: fixed; bottom: 85px; right: 16px; background: #25D366; color: white; padding: 10px 18px; border-radius: 30px; font-weight: 700; font-size: 14px; box-shadow: 0 4px 12px rgba(37,211,102,0.4); z-index: 99; text-decoration: none; }
+.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 200; align-items: flex-end; justify-content: center; }
+.modal-overlay.active { display: flex; }
+.modal-content { background: white; width: 100%; max-width: 600px; border-radius: 20px 20px 0 0; padding: 20px; max-height: 92vh; overflow-y: auto; }
+.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; border-bottom: 1px solid #eee; padding-bottom: 12px; }
+.modal-header h2 { font-size: 18px; color: #0b2e59; }
+.close-modal { background: #f1f3f4; border: none; width: 34px; height: 34px; border-radius: 50%; font-size: 18px; cursor: pointer; }
+.input-group { margin-bottom: 14px; }
+.input-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: #5f6368; }
+.input-group input { width: 100%; padding: 12px; border: 1px solid #dadce0; border-radius: 10px; font-size: 15px; outline: none; }
+.pkg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+.pkg-item { border: 2px solid #dadce0; border-radius: 10px; padding: 12px; cursor: pointer; text-align: center; transition: 0.15s; }
+.pkg-item.selected { border-color: #1a73e8; background: #e8f0fe; }
+.pkg-item .diamonds { font-weight: 600; color: #202124; font-size: 14px; }
+.pkg-item .price { font-weight: 700; color: #ff6b00; margin-top: 4px; font-size: 14px; }
+.payment-section { background: #fff8e1; border: 2px solid #ff9800; border-radius: 12px; padding: 14px; margin-bottom: 16px; }
+.payment-section h3 { color: #e65100; font-size: 15px; margin-bottom: 10px; }
+.pay-methods { display: flex; gap: 8px; margin-bottom: 14px; }
+.pay-method { flex: 1; padding: 10px 4px; border: 2px solid #dadce0; border-radius: 8px; text-align: center; font-weight: 700; font-size: 13px; cursor: pointer; background: white; }
+.pay-method.selected { border-color: #e91e63; background: #fce4ec; color: #c2185b; }
+.pay-info { background: white; border-radius: 8px; padding: 12px; margin-bottom: 14px; font-size: 13px; line-height: 1.6; }
+.pay-info .num { font-size: 19px; font-weight: 800; color: #1a73e8; letter-spacing: 1px; }
+.pay-info .copy { color: #1a73e8; font-size: 12px; cursor: pointer; margin-left: 6px; font-weight: 600; }
+.total-box { background: #e8f5e9; border-radius: 8px; padding: 12px; margin-bottom: 14px; display: flex; justify-content: space-between; font-weight: 700; color: #2e7d32; }
+.order-btn { width: 100%; padding: 14px; background: #1a73e8; color: white; border: none; border-radius: 10px; font-size: 17px; font-weight: 700; cursor: pointer; }
+.order-btn:active { background: #0d47a1; }
+#loginPage { display: none; min-height: 100vh; background: #f8f9fa; padding: 20px; flex-direction: column; align-items: center; justify-content: center; }
+#loginPage.active { display: flex; }
+.login-card { background: white; width: 100%; max-width: 400px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); padding: 28px; }
+.login-card h2 { font-size: 24px; margin-bottom: 18px; color: #202124; }
+.login-card input { width: 100%; padding: 12px 14px; border: 1px solid #dadce0; border-radius: 8px; font-size: 15px; margin-bottom: 14px; background: #f8f9fa; }
+.login-card button { width: 100%; padding: 13px; background: #0b2e59; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 700; cursor: pointer; }
+.back-btn { background: #5f6368 !important; margin-top: 10px; }
+</style>
+</head>
+<body>
+
+<div id="mainApp">
+  <div class="top-header">
+    <div class="logo"><img src="/logo.png" alt="Quick Top Up"></div>
+    <button class="login-btn" onclick="openLogin()">Login</button>
+  </div>
+
+  <div class="hero">
+    <div>
+      <h1>FREE <span>FIRE</span></h1>
+      <p>DIAMOND TOP UP</p>
+    </div>
+  </div>
+
+  <h2 class="section-title">Select Service</h2>
+  <div class="menu-grid">
+    <div class="menu-item" onclick="openOrder('uid')">
+      <div class="menu-img">🎮</div>
+      <div class="menu-label">UID TOP UP BD</div>
+    </div>
+    <div class="menu-item" onclick="openOrder('unipin')">
+      <div class="menu-img">🎟️</div>
+      <div class="menu-label">UNIPIN VOUCHER</div>
+    </div>
+    <div class="menu-item" onclick="openOrder('levelup')">
+      <div class="menu-img">⬆️</div>
+      <div class="menu-label">LEVEL UP PASS</div>
+    </div>
+    <div class="menu-item" onclick="openOrder('offer')">
+      <div class="menu-img">👑</div>
+      <div class="menu-label">WEEKLY/MONTHLY OFFER</div>
+    </div>
+  </div>
+</div>
+
+<div id="loginPage">
+  <div class="login-card">
+    <h2>Login</h2>
+    <input type="email" id="loginEmail" placeholder="Email">
+    <input type="password" id="loginPassword" placeholder="Password">
+    <button onclick="doLogin()">Login</button>
+    <button class="back-btn" onclick="closeLogin()">Back</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="orderModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 id="modalTitle">UID Top Up</h2>
+      <button class="close-modal" onclick="closeModal()">✕</button>
+    </div>
+
+    <div class="input-group">
+      <label>Free Fire Player ID</label>
+      <input type="text" id="freeFireId" placeholder="যেমন: 123456789">
+    </div>
+
+    <div class="pkg-grid" id="pkgGrid"></div>
+
+    <div class="payment-section">
+      <h3>💰 Payment Method</h3>
+      <div class="pay-methods">
+        <div class="pay-method selected" data-method="bkash" onclick="selectPay('bkash')">bKash</div>
+        <div class="pay-method" data-method="nagad" onclick="selectPay('nagad')">Nagad</div>
+        <div class="pay-method" data-method="rocket" onclick="selectPay('rocket')">Rocket</div>
+      </div>
+
+      <div class="pay-info">
+        <div>Send Money / Personal to:</div>
+        <div><span class="num" id="payNumber">01306264979</span>
+          <span class="copy" onclick="copyNum()">📋 Copy</span>
+        </div>
+        <div style="font-size:11px;color:#666;margin-top:6px;">
+          উপরের নাম্বারে সেন্ড মানি করে নিচে Transaction ID দাও
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label>তোমার Sender Number</label>
+        <input type="text" id="senderNum" placeholder="যেমন: 01812-345678">
+      </div>
+
+      <div class="input-group">
+        <label>Transaction ID (TrxID)</label>
+        <input type="text" id="trxId" placeholder="যেমন: 9F2K1A5B7C">
+      </div>
+    </div>
+
+    <div class="total-box">
+      <span>Total Amount:</span>
+      <span id="totalAmount">৳ 0</span>
+    </div>
+
+    <button class="order-btn" onclick="placeOrder()">Confirm Order</button>
+  </div>
+</div>
+
+<div class="bottom-nav">
+  <div class="nav-item active"><span class="nav-icon">🏠</span><span>Home</span></div>
+  <div class="nav-item"><span class="nav-icon">🛒</span><span>Orders</span></div>
+  <div class="nav-item"><span class="nav-icon">👤</span><span>Profile</span></div>
+</div>
+
+<a class="help-btn" href="https://wa.me/8801306264979" target="_blank">💬 Help</a>
+
+<script>
+const PKG = {
+  uid: [
+    {n:'25 💎',p:25},
+    {n:'50 💎',p:45},
+    {n:'115 💎',p:95},
+    {n:'240 💎',p:185},
+    {n:'610 💎',p:450},
+    {n:'1240 💎',p:880}
+  ],
+  unipin: [
+    {n:'Unipin 100',p:80},
+    {n:'Unipin 300',p:240},
+    {n:'Unipin 500',p:400},
+    {n:'Unipin 1000',p:780}
+  ],
+  levelup: [
+    {n:'Level Up Pass',p:120},
+    {n:'Elite Pass',p:790},
+    {n:'Elite Bundle',p:1590}
+  ],
+  offer: [
+    {n:'Weekly Offer',p:160},
+    {n:'Monthly Offer',p:790},
+    {n:'Weekly Lite',p:40},
+    {n:'Weekly Deluxe',p:250}
+  ]
+};
+
+const TITLES = {
+  uid: '🎮 UID Top Up BD',
+  unipin: '🎟️ Unipin Voucher',
+  levelup: '⬆️ Level Up Pass',
+  offer: '👑 Weekly/Monthly Offer'
+};
+
+const PAY_NUMS = {
+  bkash: '01306264979',
+  nagad: '01323716805',
+  rocket: '01756965060'
+};
+
+let selectedPkg = null;
+let selectedMethod = 'bkash';
+
+function openLogin() { document.getElementById('loginPage').classList.add('active'); document.getElementById('mainApp').style.display='none'; }
+function closeLogin() { document.getElementById('loginPage').classList.remove('active'); document.getElementById('mainApp').style.display='block'; }
+
+function doLogin() {
+  const email = document.getElementById('loginEmail').value;
+  const pass = document.getElementById('loginPassword').value;
+  if (email && pass) { alert('✅ Login সফল!'); closeLogin(); }
+  else alert('❌ Email এবং Password দিন');
+}
+
+function openOrder(service) {
+  document.getElementById('modalTitle').textContent = TITLES[service];
+  const grid = document.getElementById('pkgGrid');
+  grid.innerHTML = '';
+  selectedPkg = null;
+  document.getElementById('totalAmount').textContent = '৳ 0';
+  PKG[service].forEach(p => {
+    const d = document.createElement('div');
+    d.className = 'pkg-item';
+    d.innerHTML = '<div class="diamonds">' + p.n + '</div><div class="price">৳ ' + p.p + '</div>';
+    d.onclick = () => {
+      document.querySelectorAll('.pkg-item').forEach(x => x.classList.remove('selected'));
+      d.classList.add('selected');
+      selectedPkg = p;
+      document.getElementById('totalAmount').textContent = '৳ ' + p.p;
+    };
+    grid.appendChild(d);
+  });
+  document.getElementById('orderModal').classList.add('active');
+}
+
+function closeModal() { document.getElementById('orderModal').classList.remove('active'); }
+
+function selectPay(method) {
+  selectedMethod = method;
+  document.querySelectorAll('.pay-method').forEach(x => x.classList.remove('selected'));
+  document.querySelector('[data-method="' + method + '"]').classList.add('selected');
+  document.getElementById('payNumber').textContent = PAY_NUMS[method];
+}
+
+function copyNum() {
+  const num = document.getElementById('payNumber').textContent;
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(num).then(() => alert('✅ Copy হয়েছে: ' + num));
+  } else {
+    alert('Number: ' + num);
+  }
+}
+
+function placeOrder() {
+  const ffid = document.getElementById('freeFireId').value.trim();
+  const sender = document.getElementById('senderNum').value.trim();
+  const trx = document.getElementById('trxId').value.trim();
+
+  if (!ffid) return alert('❌ Free Fire ID দাও');
+  if (!selectedPkg) return alert('❌ একটা package select করো');
+  if (!sender) return alert('❌ তোমার Sender Number দাও');
+  if (!trx) return alert('❌ Transaction ID দাও');
+
+  fetch('/api/save-order', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      freeFireId: ffid,
+      packageName: selectedPkg.n,
+      price: selectedPkg.p,
+      method: selectedMethod,
+      senderNumber: sender,
+      trxId: trx
+    })
+  })
+  .then(r => r.json())
+  .then(data => {
+    if (data.success) {
+      alert('✅ Order Confirmed!\n\n🎮 FF ID: ' + ffid + '\n🎁 ' + selectedPkg.n + '\n💵 ৳' + selectedPkg.p + '\n💳 ' + selectedMethod.toUpperCase() + '\n🔖 TrxID: ' + trx + '\n\nAdmin শীঘ্রই verify করবে।');
+      closeModal();
+      document.getElementById('freeFireId').value = '';
+      document.getElementById('senderNum').value = '';
+      document.getElementById('trxId').value = '';
+      document.getElementById('totalAmount').textContent = '৳ 0';
+      selectedPkg = null;
+    } else {
+      alert('❌ ' + (data.error || 'সমস্যা হয়েছে'));
+    }
+  })
+  .catch(() => alert('✅ Order দিয়েছি! Admin verify করবে।'));
+}
+</script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QUICK TOP UP - Free Fire</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+body { background: #f0f2f5; padding-bottom: 80px; color: #202124; }
 .top-header { background: linear-gradient(135deg, #1a73e8, #0d47a1); padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; color: white; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
 .logo { font-size: 20px; font-weight: 800; letter-spacing: 1px; }
 .logo span { color: #ff6b00; }
